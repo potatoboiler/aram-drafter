@@ -1,0 +1,19 @@
+{
+  "name": "aram-drafter",
+  "version": "0.0.0",
+  "description": "ARAM custom draft tool, since custom lobbies are non functional",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/potatoboiler/aram-drafter.git"
+  },
+  "author": "potatoboiler",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/potatoboiler/aram-drafter/issues"
+  },
+  "homepage": "https://github.com/potatoboiler/aram-drafter#readme"
+}
