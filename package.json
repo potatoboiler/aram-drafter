@@ -4,6 +4,10 @@
   "description": "ARAM custom draft tool, since custom lobbies are non functional",
   "main": "index.js",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +19,11 @@
   "bugs": {
     "url": "https://github.com/potatoboiler/aram-drafter/issues"
   },
-  "homepage": "https://github.com/potatoboiler/aram-drafter#readme"
+  "homepage": "https://potatoboiler.github.io/projects/aram-drafter",
+  "dependencies": {
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
+  }
 }
