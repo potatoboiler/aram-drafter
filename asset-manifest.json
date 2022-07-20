@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/projects/aram-drafter/static/js/main.2733b8c1.js",
+    "main.js": "/projects/aram-drafter/static/js/main.dcd45e9c.js",
     "index.html": "/projects/aram-drafter/index.html",
-    "main.2733b8c1.js.map": "/projects/aram-drafter/static/js/main.2733b8c1.js.map"
+    "main.dcd45e9c.js.map": "/projects/aram-drafter/static/js/main.dcd45e9c.js.map"
   },
   "entrypoints": [
-    "static/js/main.2733b8c1.js"
+    "static/js/main.dcd45e9c.js"
   ]
 }
