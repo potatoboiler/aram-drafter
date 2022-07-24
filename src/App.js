@@ -186,9 +186,17 @@ class Arena extends React.Component {
           gridGap: 0
         }}
       >
-        <ChampColumn champs={champs.slice(0, 15)} n={this.state.n_players} />
+        <ChampColumn
+          champs={champs.slice(0, 15)}
+          n={this.state.n_players}
+          id='left'
+        />
         <div>Column 2</div>
-        <ChampColumn champs={champs.slice(15, 30)} n={this.state.n_players} />
+        <ChampColumn
+          champs={champs.slice(15, 30)}
+          n={this.state.n_players}
+          id='right'
+        />
       </div>
     )
   }
@@ -207,6 +215,7 @@ class ChampColumn extends React.Component {
             c={this.props.champs
               .slice(champ_idx, champ_idx + 3)
               .map(x => CHAMP_LIST[x])}
+            id={this.props.id}
           />
         </div>
       )
@@ -218,29 +227,41 @@ class ChampColumn extends React.Component {
 
 /* props.c = champ names */
 function ChampTable (props) {
+  let id = props.id
   return (
-    <table>
-      <ChampEntry c={props.c[0]} />
-      <ChampEntry c={props.c[1]} />
-      <ChampEntry c={props.c[2]} />
+    <table id={id}>
+      <ChampEntry c={props.c[0]} id={id} />
+      <ChampEntry c={props.c[1]} id={id} />
+      <ChampEntry c={props.c[2]} id={id} />
     </table>
   )
 }
 
 function ChampEntry (props) {
-  return (
-    <tr>
-      <td>{props.c}</td>
+  if (props.id == 'left') {
+    var entry = (
       <td>
+        {props.c}{' '}
         <img
-          src='%PUBLIC_URL%' {...'/aram-drafter/ico/' + props.c + '_OriginalSquare.png'}
+          src={'/ico/' + props.c + '_OriginalSquare.png'}
           alt={props.c}
-          height={50}
-          width={50}
+          height='35'
         />
       </td>
-    </tr>
-  )
+    )
+  } else {
+    var entry = (
+      <td>
+        <img
+          src={'/ico/' + props.c + '_OriginalSquare.png'}
+          alt={props.c}
+          height='35'
+        />
+        {props.c}
+      </td>
+    )
+  }
+  return <tr>{entry}</tr>
 }
 
 function ShuffleArray () {

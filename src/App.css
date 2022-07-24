@@ -1,3 +1,11 @@
-.App {
-  text-align: center;
+table {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#left {
+  text-align: right;
+}
+#right {
+  text-align: left;
 }
