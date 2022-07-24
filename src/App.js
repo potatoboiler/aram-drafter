@@ -4,6 +4,8 @@ import React from 'react'
 
 const NUM_CHAMPS = 161
 
+const BASE_URL = '/aram-drafter'
+
 const CHAMP_LIST = [
   'Aatrox',
   'Ahri',
@@ -218,40 +220,26 @@ class ChampColumn extends React.Component {
 function ChampTable (props) {
   return (
     <table>
-      <tr>
-        <td>{props.c[0]}</td>{' '}
-        <td>
-          <img
-            src={'/ico/' + props.c[0] + '_OriginalSquare.png'}
-            alt={props.c[0]}
-            height={50}
-            width={50}
-          />
-        </td>
-      </tr>
-      <tr>
-        <td>{props.c[1]}</td>
-        <td>
-          <img
-            src={'/ico/' + props.c[1] + '_OriginalSquare.png'}
-            alt={props.c[1]}
-            height={50}
-            width={50}
-          />
-        </td>
-      </tr>
-      <tr>
-        <td>{props.c[2]}</td>
-        <td>
-          <img
-            src={'/ico/' + props.c[2] + '_OriginalSquare.png'}
-            alt={props.c[2]}
-            height={50}
-            width={50}
-          />
-        </td>
-      </tr>
+      <ChampEntry c={props.c[0]} />
+      <ChampEntry c={props.c[1]} />
+      <ChampEntry c={props.c[2]} />
     </table>
+  )
+}
+
+function ChampEntry (props) {
+  return (
+    <tr>
+      <td>{props.c}</td>
+      <td>
+        <img
+          src={'/aram-drafter/ico/' + props.c + '_OriginalSquare.png'}
+          alt={props.c}
+          height={50}
+          width={50}
+        />
+      </td>
+    </tr>
   )
 }
 
