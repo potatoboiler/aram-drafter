@@ -233,7 +233,7 @@ function ChampEntry (props) {
       <td>{props.c}</td>
       <td>
         <img
-          src={'/aram-drafter/ico/' + props.c + '_OriginalSquare.png'}
+          src='%PUBLIC_URL%' {...'/aram-drafter/ico/' + props.c + '_OriginalSquare.png'}
           alt={props.c}
           height={50}
           width={50}
