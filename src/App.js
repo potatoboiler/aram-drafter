@@ -256,7 +256,7 @@ function ChampEntry (props) {
           src={'/ico/' + props.c + '_OriginalSquare.png'}
           alt={props.c}
           height='35'
-        />
+        />{' '}
         {props.c}
       </td>
     )

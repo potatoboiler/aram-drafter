@@ -1,11 +1,10 @@
-table {
-  margin-right: auto;
-  margin-left: auto;
-}
-
 #left {
+  margin-right: 0;
+  margin-left: auto;
   text-align: right;
 }
 #right {
+  margin-left: 0;
+  margin-right: auto;
   text-align: left;
 }
