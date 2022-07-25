@@ -243,7 +243,7 @@ function ChampEntry (props) {
       <td>
         {props.c}{' '}
         <img
-          src={'/ico/' + props.c + '_OriginalSquare.png'}
+          src={'/aram-drafter/ico/' + props.c + '_OriginalSquare.png'}
           alt={props.c}
           height='35'
         />
@@ -253,7 +253,7 @@ function ChampEntry (props) {
     var entry = (
       <td>
         <img
-          src={'/ico/' + props.c + '_OriginalSquare.png'}
+          src={'/aram-drafter/ico/' + props.c + '_OriginalSquare.png'}
           alt={props.c}
           height='35'
         />{' '}
