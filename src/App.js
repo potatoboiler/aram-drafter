@@ -20,7 +20,7 @@ const CHAMP_LIST = [
   'Aurelion_Sol',
   'Azir',
   'Bard',
-  'Bel%27Veth',
+  "Bel'Veth",
   'Blitzcrank',
   'Brand',
   'Braum',
