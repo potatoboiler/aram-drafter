@@ -20,14 +20,14 @@ const CHAMP_LIST = [
   'Aurelion_Sol',
   'Azir',
   'Bard',
-  "Bel'Veth",
+  'Bel\'Veth',
   'Blitzcrank',
   'Brand',
   'Braum',
   'Caitlyn',
   'Camille',
   'Cassiopeia',
-  'Cho%27Gath',
+  'Cho\'Gath',
   'Corki',
   'Darius',
   'Diana',
@@ -58,7 +58,7 @@ const CHAMP_LIST = [
   'Jayce',
   'Jhin',
   'Jinx',
-  'Kai%27Sa',
+  'Kai\'Sa',
   'Kalista',
   'Karma',
   'Karthus',
@@ -67,10 +67,10 @@ const CHAMP_LIST = [
   'Kayle',
   'Kayn',
   'Kennen',
-  'Kha%27Zix',
+  'Kha\'Zix',
   'Kindred',
   'Kled',
-  'Kog%27Maw',
+  'Kog\'Maw',
   'LeBlanc',
   'Lee_Sin',
   'Leona',
@@ -104,7 +104,7 @@ const CHAMP_LIST = [
   'Quinn',
   'Rakan',
   'Rammus',
-  'Rek%27Sai',
+  'Rek\'Sai',
   'Rell',
   'Renata_Glasc',
   'Renekton',
@@ -145,7 +145,7 @@ const CHAMP_LIST = [
   'Varus',
   'Vayne',
   'Veigar',
-  'Vel%27Koz',
+  'Vel\'Koz',
   'Vex',
   'Viego',
   'Viktor',
@@ -171,12 +171,12 @@ const CHAMP_LIST = [
 ]
 
 class Arena extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = { n_players: 5 }
   }
 
-  render () {
+  render() {
     const champs = ShuffleArray()
     return (
       <div
@@ -191,7 +191,7 @@ class Arena extends React.Component {
           n={this.state.n_players}
           id='left'
         />
-        <div>Column 2</div>
+        <div></div>
         <ChampColumn
           champs={champs.slice(15, 30)}
           n={this.state.n_players}
@@ -205,7 +205,7 @@ class Arena extends React.Component {
 //<ChampColumn champs={champs} n={this.state.n_players} />
 class ChampColumn extends React.Component {
   // constructor (props) {}
-  render (props) {
+  render(props) {
     var champ_idx = 0
     var rows = []
     for (var i = 0; i < this.props.n; i++) {
@@ -226,7 +226,7 @@ class ChampColumn extends React.Component {
 }
 
 /* props.c = champ names */
-function ChampTable (props) {
+function ChampTable(props) {
   let id = props.id
   return (
     <table id={id}>
@@ -237,7 +237,7 @@ function ChampTable (props) {
   )
 }
 
-function ChampEntry (props) {
+function ChampEntry(props) {
   if (props.id == 'left') {
     var entry = (
       <td>
@@ -264,13 +264,13 @@ function ChampEntry (props) {
   return <tr>{entry}</tr>
 }
 
-function ShuffleArray () {
+function ShuffleArray() {
   return [...Array(NUM_CHAMPS).keys()]
     .sort(() => 0.5 - Math.random())
     .slice(0, 30)
 }
 
-function App () {
+function App() {
   return (
     <div className='App'>
       <Arena />
