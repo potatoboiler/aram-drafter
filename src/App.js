@@ -235,29 +235,13 @@ function ChampTable(props) {
 }
 
 function ChampEntry(props) {
-  if (props.id === 'left') {
-    var entry = (
-      <td>
-        {props.c}{' '}
-        <img
-          src={GetChampionIconURI(props.c)}
-          alt={props.c}
-          height='35'
-        />
-      </td>
-    )
-  } else {
-    var entry = (
-      <td>
-        <img
-          src={GetChampionIconURI(props.c)}
-          alt={props.c}
-          height='35'
-        />{' '}
-        {props.c}
-      </td>
-    )
-  }
+  var entry =
+    <img
+      src={GetChampionIconURI(props.c)}
+      alt={props.c}
+      height='35'
+    />;
+  entry = (props.id === 'left') ? <td>{props.c}{' '}{entry}</td> : <td>{entry}{' '}{props.c}</td>;
   return <tr>{entry}</tr>
 }
 
