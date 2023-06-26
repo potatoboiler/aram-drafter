@@ -1,10 +1,7 @@
-import logo from './logo.svg'
 import './App.css'
 import React from 'react'
 
 const NUM_CHAMPS = 161
-
-const BASE_URL = '/aram-drafter'
 
 const CHAMP_LIST = [
   'Aatrox',
@@ -238,12 +235,12 @@ function ChampTable(props) {
 }
 
 function ChampEntry(props) {
-  if (props.id == 'left') {
+  if (props.id === 'left') {
     var entry = (
       <td>
         {props.c}{' '}
         <img
-          src={'/aram-drafter/ico/' + props.c + '_OriginalSquare.png'}
+          src={GetChampionIconURI(props.c)}
           alt={props.c}
           height='35'
         />
@@ -253,7 +250,7 @@ function ChampEntry(props) {
     var entry = (
       <td>
         <img
-          src={'/aram-drafter/ico/' + props.c + '_OriginalSquare.png'}
+          src={GetChampionIconURI(props.c)}
           alt={props.c}
           height='35'
         />{' '}
@@ -262,6 +259,10 @@ function ChampEntry(props) {
     )
   }
   return <tr>{entry}</tr>
+}
+
+function GetChampionIconURI(name) {
+  return '/aram-drafter/ico/' + name + '_OriginalSquare.png'
 }
 
 function ShuffleArray() {
