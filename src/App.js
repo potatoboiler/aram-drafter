@@ -1,6 +1,7 @@
 import './App.css'
 import React from 'react'
 
+// Fiddlesticks must be capitalized as FiddleSticks
 const CHAMPS = {
   Aatrox: 'Aatrox',
   Ahri: 'Ahri',
@@ -32,7 +33,7 @@ const CHAMPS = {
   Elise: 'Elise',
   Evelynn: 'Evelynn',
   Ezreal: 'Ezreal',
-  Fiddlesticks: 'Fiddlesticks',
+  FiddleSticks: 'Fiddlesticks',
   Fiora: 'Fiora',
   Fizz: 'Fizz',
   Galio: 'Galio',

@@ -6,6 +6,8 @@ Because custom ARAM lobbies do not have rerolls in champion select, this tool wa
 ## Miscellaneous
 This app was boostrapped using [create-react-app](https://github.com/facebook/create-react-app).
 
+Apparently if you have an undefined key access, spaces will render as underscores.
+
 ## Updating workflow 
 TODO: make this less manual.
 
