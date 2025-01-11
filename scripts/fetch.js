@@ -96,5 +96,5 @@ async function fetch_names() {
     console.log(master)
 }
 
-// fetch_images()
+fetch_images()
 fetch_names()
