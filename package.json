@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "fetch": "node scripts/fetch.cjs"
+    "fetch": "node scripts/fetch.cjs",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@octokit/rest": "^22.0.0",
