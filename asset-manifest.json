@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/aram-drafter/static/css/main.b1c04f58.css",
+    "main.js": "/aram-drafter/static/js/main.f4fe13eb.js",
+    "index.html": "/aram-drafter/index.html",
+    "main.b1c04f58.css.map": "/aram-drafter/static/css/main.b1c04f58.css.map",
+    "main.f4fe13eb.js.map": "/aram-drafter/static/js/main.f4fe13eb.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b1c04f58.css",
+    "static/js/main.f4fe13eb.js"
+  ]
+}
