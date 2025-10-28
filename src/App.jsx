@@ -1,5 +1,5 @@
 import './App.css'
-import React from 'react'
+import { Component } from 'preact'
 
 // Fiddlesticks must be capitalized as FiddleSticks
 const CHAMPS = {
@@ -176,7 +176,7 @@ const CHAMPS = {
 const CHAMP_LIST = Object.keys(CHAMPS)
 const NUM_CHAMPS = CHAMP_LIST.length
 
-class Arena extends React.Component {
+class Arena extends Component {
   constructor(props) {
     super(props)
     this.state = { n_players: 5 }
@@ -209,7 +209,7 @@ class Arena extends React.Component {
 }
 
 //<ChampColumn champs={champs} n={this.state.n_players} />
-class ChampColumn extends React.Component {
+class ChampColumn extends Component {
   // constructor (props) {}
   render(props) {
     var champ_idx = 0
@@ -266,7 +266,7 @@ function ShuffleArray() {
     .slice(0, 30)
 }
 
-function App() {
+export function App() {
   return (
     <div className='App'>
       <Arena />
