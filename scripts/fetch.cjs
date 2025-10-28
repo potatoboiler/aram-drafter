@@ -7,26 +7,29 @@ const octokit = new Octokit({
     auth: process.env.GH_PAT,
 });
 
+const repoOwner = "noxelisdev";
+const repoName = "LoL_DDragon";
+
 const getTreeFromEntry = (entry) => octokit.rest.git.getTree({
-    owner: "InFinity54",
-    repo: "LoL_DDragon",
+    owner: repoOwner,
+    repo: repoName,
     tree_sha: entry.sha
 });
 
 async function fetch_images() {
     const master = await octokit.rest.git.getRef({
-        owner: "InFinity54",
-        repo: "LoL_DDragon",
+        owner: repoOwner,
+        repo: repoName,
         ref: "heads/master",
     })
         .then((ref) => octokit.rest.repos.getCommit({
-            owner: "InFinity54",
-            repo: "LoL_DDragon",
+            owner: repoOwner,
+            repo: repoName,
             ref: ref.data.object.sha,
         }))
         .then((commit) => octokit.rest.git.getTree({
-            owner: "InFinity54",
-            repo: "LoL_DDragon",
+            owner: repoOwner,
+            repo: repoName,
             tree_sha: commit.data.commit.tree.sha,
         }))
         .then((tree) => tree.data.tree.filter((key) => key.path === "latest")[0])
@@ -36,8 +39,8 @@ async function fetch_images() {
         .then((tree) => tree.data.tree.filter((key) => key.path === "champion")[0])
         .then(getTreeFromEntry)
         .then(async (tree) => await Promise.all(tree.data.tree.map(async (entry) => [entry.path, await octokit.rest.git.getBlob({
-            owner: "InFinity54",
-            repo: "LoL_DDragon",
+            owner: repoOwner,
+            repo: repoName,
             file_sha: entry.sha
         })])))
         .then(
@@ -61,18 +64,18 @@ async function fetch_images() {
 
 async function fetch_names() {
     const master = await octokit.rest.git.getRef({
-        owner: "InFinity54",
-        repo: "LoL_DDragon",
+        owner: repoOwner,
+        repo: repoName,
         ref: "heads/master",
     })
         .then((ref) => octokit.rest.repos.getCommit({
-            owner: "InFinity54",
-            repo: "LoL_DDragon",
+            owner: repoOwner,
+            repo: repoName,
             ref: ref.data.object.sha,
         }))
         .then((commit) => octokit.rest.git.getTree({
-            owner: "InFinity54",
-            repo: "LoL_DDragon",
+            owner: repoOwner,
+            repo: repoName,
             tree_sha: commit.data.commit.tree.sha,
         }))
         .then((tree) => tree.data.tree.filter((key) => key.path === "latest")[0])
@@ -83,8 +86,8 @@ async function fetch_names() {
         .then(getTreeFromEntry)
         .then((tree) => tree.data.tree.filter((key) => key.path === "champion.json")[0])
         .then((entry) => octokit.rest.git.getBlob({
-            owner: "Infinity54",
-            repo: "LoL_DDragon",
+            owner: repoOwner,
+            repo: repoName,
             file_sha: entry.sha,
         }))
         .then((entry) => {

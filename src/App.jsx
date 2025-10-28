@@ -1,5 +1,5 @@
 import './App.css'
-import React from 'react'
+import { Component } from 'preact'
 
 // Fiddlesticks must be capitalized as FiddleSticks
 const CHAMPS = {
@@ -84,6 +84,7 @@ const CHAMPS = {
   Malzahar: 'Malzahar',
   Maokai: 'Maokai',
   MasterYi: 'Master Yi',
+  Mel: 'Mel',
   Milio: 'Milio',
   MissFortune: 'Miss Fortune',
   MonkeyKing: 'Wukong',
@@ -164,6 +165,7 @@ const CHAMPS = {
   Yasuo: 'Yasuo',
   Yone: 'Yone',
   Yorick: 'Yorick',
+  Yunara: 'Yunara',
   Yuumi: 'Yuumi',
   Zac: 'Zac',
   Zed: 'Zed',
@@ -176,7 +178,7 @@ const CHAMPS = {
 const CHAMP_LIST = Object.keys(CHAMPS)
 const NUM_CHAMPS = CHAMP_LIST.length
 
-class Arena extends React.Component {
+class Arena extends Component {
   constructor(props) {
     super(props)
     this.state = { n_players: 5 }
@@ -209,7 +211,7 @@ class Arena extends React.Component {
 }
 
 //<ChampColumn champs={champs} n={this.state.n_players} />
-class ChampColumn extends React.Component {
+class ChampColumn extends Component {
   // constructor (props) {}
   render(props) {
     var champ_idx = 0
@@ -257,7 +259,10 @@ function ChampEntry(props) {
 }
 
 function GetChampionIconURI(name) {
-  return '/aram-drafter/ico/' + name + '.png'
+  // Use Vite's base URL so `public/ico/...` assets resolve correctly
+  // in dev and when the app is deployed under a sub-path.
+  // Thanks to https://vitejs.dev/guide/assets.html#the-public-directory and Copilot
+  return `${import.meta.env.BASE_URL}ico/${name}.png`
 }
 
 function ShuffleArray() {
@@ -266,7 +271,7 @@ function ShuffleArray() {
     .slice(0, 30)
 }
 
-function App() {
+export function App() {
   return (
     <div className='App'>
       <Arena />
