@@ -259,7 +259,10 @@ function ChampEntry(props) {
 }
 
 function GetChampionIconURI(name) {
-  return '/aram-drafter/ico/' + name + '.png'
+  // Use Vite's base URL so `public/ico/...` assets resolve correctly
+  // in dev and when the app is deployed under a sub-path.
+  // Thanks to https://vitejs.dev/guide/assets.html#the-public-directory and Copilot
+  return `${import.meta.env.BASE_URL}ico/${name}.png`
 }
 
 function ShuffleArray() {
