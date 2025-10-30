@@ -45,17 +45,10 @@ async function fetch_images() {
         })])))
         .then(
             async (entries) => {
-                if (!fs.existsSync(path.join(__dirname, 'img'))) {
-                    fs.mkdir(path.join(__dirname, 'img'), (err) => {
-                        if (err) {
-                            return console.error(err);
-                        }
-                    });
-                }
                 entries.forEach((entry) => {
                     const [name, image] = entry;
                     const base64data = image.data.content.replace(/\\n/g, '');
-                    fs.writeFile(path.join(__dirname, 'img/') + name, base64data, { encoding: 'base64' }, (err) => { console.log("Created " + name) })
+                    fs.writeFile(path.join(__dirname, '../public/ico/') + name, base64data, { encoding: 'base64' }, (err) => { console.log("Created " + name) })
                 })
 
             })
@@ -97,6 +90,7 @@ async function fetch_names() {
         })
 
     console.log(master)
+    fs.writeFileSync(path.join(__dirname, '../public/champs.json'), JSON.stringify(master, null, 4))
 }
 
 fetch_images()
