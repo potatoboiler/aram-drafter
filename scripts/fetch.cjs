@@ -90,7 +90,7 @@ async function fetch_names() {
         })
 
     console.log(master)
-    fs.writeFileSync(path.join(__dirname, '../public/champs.json'), JSON.stringify(master, null, 4))
+    fs.writeFileSync(path.join(__dirname, '../src/champs.json'), JSON.stringify(master, null, 4))
 }
 
 fetch_images()
