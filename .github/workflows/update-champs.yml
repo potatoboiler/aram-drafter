@@ -26,6 +26,11 @@ jobs:
       - name: install deps
         run: npm ci
 
+      - name: 'Create env file'
+        run: |
+          touch .env
+          echo GH_PAT=${{ secrets.GITHUB_TOKEN }} >> .env
+
       - name: run update script
         run: npm run fetch
         working-directory: .
