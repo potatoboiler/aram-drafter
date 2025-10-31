@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 .env
+
+public/ico/XinZhao.png
+public/ico/Leblanc.png
