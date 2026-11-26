@@ -1,97 +1,50 @@
-const { Octokit } = require("@octokit/rest");
-const { _ } = require('dotenv').config();
+const { execFileSync } = require('child_process');
 const fs = require('fs');
+const os = require('os');
 const path = require('path');
 
-const octokit = new Octokit({
-    auth: process.env.GH_PAT,
-});
+const REPO_URL = 'https://github.com/noxelisdev/LoL_DDragon.git';
 
-const repoOwner = "noxelisdev";
-const repoName = "LoL_DDragon";
+function main() {
+    const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'lol-ddragon-'));
 
-const getTreeFromEntry = (entry) => octokit.rest.git.getTree({
-    owner: repoOwner,
-    repo: repoName,
-    tree_sha: entry.sha
-});
+    try {
+        execFileSync(
+            'git',
+            ['clone', '--depth=1', '--filter=blob:none', '--sparse', REPO_URL, tmpDir],
+            { stdio: 'inherit' }
+        );
 
-async function fetch_images() {
-    const master = await octokit.rest.git.getRef({
-        owner: repoOwner,
-        repo: repoName,
-        ref: "heads/master",
-    })
-        .then((ref) => octokit.rest.repos.getCommit({
-            owner: repoOwner,
-            repo: repoName,
-            ref: ref.data.object.sha,
-        }))
-        .then((commit) => octokit.rest.git.getTree({
-            owner: repoOwner,
-            repo: repoName,
-            tree_sha: commit.data.commit.tree.sha,
-        }))
-        .then((tree) => tree.data.tree.filter((key) => key.path === "latest")[0])
-        .then(getTreeFromEntry)
-        .then((tree) => tree.data.tree.filter((key) => key.path === "img")[0])
-        .then(getTreeFromEntry)
-        .then((tree) => tree.data.tree.filter((key) => key.path === "champion")[0])
-        .then(getTreeFromEntry)
-        .then(async (tree) => await Promise.all(tree.data.tree.map(async (entry) => [entry.path, await octokit.rest.git.getBlob({
-            owner: repoOwner,
-            repo: repoName,
-            file_sha: entry.sha
-        })])))
-        .then(
-            async (entries) => {
-                entries.forEach((entry) => {
-                    const [name, image] = entry;
-                    const base64data = image.data.content.replace(/\\n/g, '');
-                    fs.writeFile(path.join(__dirname, '../public/ico/') + name, base64data, { encoding: 'base64' }, (err) => { console.log("Created " + name) })
-                })
+        execFileSync(
+            'git',
+            ['-C', tmpDir, 'sparse-checkout', 'set', '--no-cone', '/latest/img/champion/', '/latest/data/en_US/champion.json'],
+            { stdio: 'inherit' }
+        );
 
-            })
-    return master;
+        const srcIcoDir = path.join(tmpDir, 'latest/img/champion');
+        const destIcoDir = path.join(__dirname, '../public/ico');
+        fs.mkdirSync(destIcoDir, { recursive: true });
+
+        let copiedCount = 0;
+        for (const entry of fs.readdirSync(srcIcoDir, { withFileTypes: true })) {
+            if (!entry.isFile()) continue;
+            fs.copyFileSync(path.join(srcIcoDir, entry.name), path.join(destIcoDir, entry.name));
+            copiedCount++;
+        }
+        console.log(`Copied ${copiedCount} champion icons`);
+
+        const champJsonPath = path.join(tmpDir, 'latest/data/en_US/champion.json');
+        const rawData = JSON.parse(fs.readFileSync(champJsonPath, 'utf8')).data;
+        const champs = {};
+        for (const champId of Object.keys(rawData)) {
+            champs[champId] = rawData[champId].name;
+        }
+
+        fs.writeFileSync(path.join(__dirname, '../src/champs.json'), JSON.stringify(champs, null, 4));
+        console.log(`Wrote ${Object.keys(champs).length} champions to src/champs.json`);
+    } finally {
+        fs.rmSync(tmpDir, { recursive: true, force: true });
+    }
 }
 
-async function fetch_names() {
-    const master = await octokit.rest.git.getRef({
-        owner: repoOwner,
-        repo: repoName,
-        ref: "heads/master",
-    })
-        .then((ref) => octokit.rest.repos.getCommit({
-            owner: repoOwner,
-            repo: repoName,
-            ref: ref.data.object.sha,
-        }))
-        .then((commit) => octokit.rest.git.getTree({
-            owner: repoOwner,
-            repo: repoName,
-            tree_sha: commit.data.commit.tree.sha,
-        }))
-        .then((tree) => tree.data.tree.filter((key) => key.path === "latest")[0])
-        .then(getTreeFromEntry)
-        .then((tree) => tree.data.tree.filter((key) => key.path === "data")[0])
-        .then(getTreeFromEntry)
-        .then((tree) => tree.data.tree.filter((key) => key.path === "en_US")[0])
-        .then(getTreeFromEntry)
-        .then((tree) => tree.data.tree.filter((key) => key.path === "champion.json")[0])
-        .then((entry) => octokit.rest.git.getBlob({
-            owner: repoOwner,
-            repo: repoName,
-            file_sha: entry.sha,
-        }))
-        .then((entry) => {
-            const champs = JSON.parse(atob(entry.data.content)).data
-            Object.keys(champs).forEach((champId) => champs[champId] = champs[champId].name)
-            return champs
-        })
-
-    console.log(master)
-    fs.writeFileSync(path.join(__dirname, '../src/champs.json'), JSON.stringify(master, null, 4))
-}
-
-fetch_images()
-fetch_names()
+main();
